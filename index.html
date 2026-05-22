@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VSTech Informática | Catálogo</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Catálogo para empresas e assistências técnicas</p>
+      <h1>VSTech Informática</h1>
+    </div>
+
+    <p class="auto-load-badge">Lista carregada automaticamente</p>
+  </header>
+
+  <main class="container">
+    <section class="controls" aria-label="Filtros do catálogo">
+      <div class="field">
+        <label for="searchInput">Pesquisar produto</label>
+        <input id="searchInput" type="search" placeholder="Digite o nome do produto">
+      </div>
+
+      <div class="field">
+        <label for="groupFilter">Grupo/categoria</label>
+        <select id="groupFilter">
+          <option value="">Todos os grupos</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="status-panel">
+      <p id="statusText">Carregando lista de produtos...</p>
+      <p><strong id="productCount">0</strong> itens encontrados</p>
+    </section>
+
+    <section class="table-wrap" aria-label="Lista de produtos">
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Produto</th>
+            <th>Grupo</th>
+            <th>Un</th>
+            <th>Valor</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody id="productTable"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
