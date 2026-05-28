@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração - Catálogo de Produtos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>VSTECH</h1>
+            </div>
+            <nav class="nav" aria-label="Navegação principal">
+                <a href="index.html" class="nav-link">Catálogo</a>
+                <a href="admin.html" class="nav-link active">Administração</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admin-container">
+        <h1 class="admin-title">Administração</h1>
+        <p class="admin-subtitle">Gerencie as imagens dos produtos do catálogo.</p>
+
+        <div class="admin-notice">
+            <strong>Como usar</strong>
+            <p>Coloque as imagens na pasta imagens, atualize a lista automática e escolha uma ou mais fotos para cada produto.</p>
+            <button type="button" onclick="fazerLogoutAdmin()">Fazer logout</button>
+        </div>
+
+        <div class="auth-section" id="authSection">
+            <h2>Autenticação requerida</h2>
+            <p>Digite a senha para acessar a área de administração e gerenciar as imagens dos produtos.</p>
+            <div class="auth-form">
+                <input type="password" id="adminPassword" placeholder="Digite a senha">
+                <button type="button" onclick="autenticarAdmin()">Acessar</button>
+            </div>
+        </div>
+
+        <div id="adminTools" class="admin-filters" style="display: none;">
+            <div class="admin-filter-field">
+                <label for="adminSearchInput">Buscar produto</label>
+                <input type="text" id="adminSearchInput" placeholder="Código, nome ou categoria">
+            </div>
+            <div class="admin-filter-field">
+                <label for="adminCategoryFilter">Categoria</label>
+                <select id="adminCategoryFilter">
+                    <option value="">Todas</option>
+                </select>
+            </div>
+            <div class="admin-filter-field">
+                <label for="adminSortFilter">Ordenar por</label>
+                <select id="adminSortFilter">
+                    <option value="default">Padrão</option>
+                    <option value="without-images">Sem foto primeiro</option>
+                    <option value="with-images">Com foto primeiro</option>
+                </select>
+            </div>
+            <div id="adminResultsCount" class="admin-results-count">0 produtos</div>
+        </div>
+
+        <div id="adminLoading" class="admin-loading" style="display: none;">
+            Carregando produtos...
+        </div>
+
+        <div id="adminError" class="admin-error" style="display: none;"></div>
+
+        <div id="adminProductsGrid" class="admin-products-grid" style="display: none;"></div>
+    </main>
+
+    <div id="adminImageModal" class="admin-image-modal">
+        <div class="admin-image-modal-content">
+            <div class="admin-image-modal-header">
+                <h2 id="adminImageModalTitle">Selecionar fotos</h2>
+                <button type="button" class="btn-modal-close" onclick="fecharSeletorImagens()">Fechar</button>
+            </div>
+            <div id="adminImageGallery" class="admin-image-gallery"></div>
+            <div class="admin-image-modal-actions">
+                <span id="adminImageSelectionCount" class="image-summary">0 fotos selecionadas</span>
+                <button type="button" class="btn-modal-save" onclick="salvarSelecaoImagens()">Salvar fotos</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 VSTECH - Administração</p>
+            <p>Versão 1.0</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

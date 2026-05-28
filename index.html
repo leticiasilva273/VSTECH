@@ -1,59 +1,99 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VSTech Informática | Catálogo</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Produtos</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <p class="eyebrow">Catálogo para empresas e assistências técnicas</p>
-      <h1>VSTech Informática</h1>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>VSTECH</h1>
+            </div>
+            <nav class="nav" aria-label="Navegação principal">
+                <a href="index.html" class="nav-link active">Catálogo</a>
+                <a href="admin.html" class="nav-link">Administração</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters-wrapper">
+                <div class="search-box">
+                    <label class="sr-only" for="searchInput">Pesquisar produto</label>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Pesquisar por nome ou código"
+                        class="search-input"
+                    >
+                </div>
+
+                <div class="filter-box">
+                    <label for="categoryFilter">Categoria</label>
+                    <select id="categoryFilter" class="category-select">
+                        <option value="">Todas as categorias</option>
+                    </select>
+                </div>
+
+                <button id="clearFilters" class="btn-clear" type="button">Limpar filtros</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+            <div id="loadingMessage" class="loading-message">
+                <span class="loading-spinner" aria-hidden="true"></span>
+                Carregando produtos...
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+            <div id="productsGrid" class="products-grid"></div>
+
+            <div id="noResults" class="no-results" style="display: none;">
+                <p>Nenhum produto encontrado</p>
+                <p>Tente ajustar seus filtros de busca</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 VSTECH Informática - Todos os direitos reservados</p>
+            <p>Telefone: 55 (69) 99290-3194</p>
+        </div>
+    </footer>
+
+    <div id="productModal" class="modal" style="display: none;">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalName">
+            <button class="modal-close" type="button" aria-label="Fechar">&times;</button>
+            <div class="modal-body">
+                <div class="modal-carousel">
+                    <button id="carouselPrev" class="carousel-btn carousel-prev" type="button" onclick="trocarImagemModal(-1)" aria-label="Foto anterior">&#8249;</button>
+                    <img id="modalImage" src="" alt="Imagem do produto" class="modal-image">
+                    <div id="carouselEmpty" class="carousel-empty">Sem imagem</div>
+                    <button id="carouselNext" class="carousel-btn carousel-next" type="button" onclick="trocarImagemModal(1)" aria-label="Próxima foto">&#8250;</button>
+                    <span id="carouselCounter" class="carousel-counter"></span>
+                </div>
+                <div class="modal-details">
+                    <h2 id="modalName"></h2>
+                    <p class="modal-info"><strong>Código:</strong> <span id="modalCode"></span></p>
+                    <p class="modal-info"><strong>Categoria:</strong> <span id="modalCategory"></span></p>
+                    <p class="modal-description" id="modalDescription"></p>
+                    <p class="modal-price" id="modalPrice"></p>
+                    <p class="modal-stock" id="modalStock"></p>
+                    <button id="modalInterestBtn" class="btn-interest" type="button">Tenho interesse</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <p class="auto-load-badge">Lista carregada automaticamente</p>
-  </header>
-
-  <main class="container">
-    <section class="controls" aria-label="Filtros do catálogo">
-      <div class="field">
-        <label for="searchInput">Pesquisar produto</label>
-        <input id="searchInput" type="search" placeholder="Digite o nome do produto">
-      </div>
-
-      <div class="field">
-        <label for="groupFilter">Grupo/categoria</label>
-        <select id="groupFilter">
-          <option value="">Todos os grupos</option>
-        </select>
-      </div>
-    </section>
-
-    <section class="status-panel">
-      <p id="statusText">Carregando lista de produtos...</p>
-      <p><strong id="productCount">0</strong> itens encontrados</p>
-    </section>
-
-    <section class="table-wrap" aria-label="Lista de produtos">
-      <table>
-        <thead>
-          <tr>
-            <th>Código</th>
-            <th>Produto</th>
-            <th>Grupo</th>
-            <th>Un</th>
-            <th>Valor</th>
-            <th>Ação</th>
-          </tr>
-        </thead>
-        <tbody id="productTable"></tbody>
-      </table>
-    </section>
-  </main>
-
-  <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
